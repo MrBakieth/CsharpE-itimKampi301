@@ -33,10 +33,14 @@ namespace CsharpEğitimKampi301.EFProject
         {
 
             lblLocationCount.Text = db.Location.Count().ToString();
+
             lblSumCapacity.Text = db.Location.Sum(x => x.Capacity).ToString();
+
             lblGuideCount.Text = db.Guide.Count().ToString();
-            lblAverageCapacity.Text = db.Location.Average(x => x.Capacity).ToString();
-            lblAverageLocationPrice.Text = db.Location.Average(x => x.Price).ToString() + "TL";
+
+            lblAverageCapacity.Text = db.Location.Average(x => x.Capacity)?.ToString("0.00");
+
+            lblAverageLocationPrice.Text = db.Location.Average(x => x.Price)?.ToString("0.00") + "TL";
 
             int lastCountryId = db.Location.Max(x => x.LocationId);
             lblLastCountryName.Text = db.Location.Where(x => x.LocationId == lastCountryId).Select(y => y.Country).FirstOrDefault();
